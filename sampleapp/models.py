@@ -2,7 +2,7 @@ from django.db import models
 import cv2
 
 ACTION_CHOICES= (
-    ('RGB to BGR', 'Blue green'),
+    ('RGB to BGR', 'BGR'),
     ('RGB to GRAY', 'GrayScale'),
 )
 

@@ -8,6 +8,7 @@ from sampleapp.forms import EmployeeForm
 from django.views.generic import DetailView
 from sampleapp.models import Sampleapp
 
+
 class EmployeeImage(TemplateView):
 
     form = EmployeeForm
@@ -22,10 +23,11 @@ class EmployeeImage(TemplateView):
             return HttpResponseRedirect(reverse_lazy('emp_image_display', kwargs={'pk': obj.id}))
 
         context = self.get_context_data(form=form)
-        return self.render_to_response(context)     
+        return self.render_to_response(context)
 
     def get(self, request, *args, **kwargs):
         return self.post(request, *args, **kwargs)
+
 
 class EmpImageDisplay(DetailView):
     model = Sampleapp

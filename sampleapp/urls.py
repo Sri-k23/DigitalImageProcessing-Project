@@ -3,5 +3,5 @@ from .views import image_request
 
 app_name = 'sampleapp'
 urlpatterns = [
-    path('', image_request, name = "image-request")
+    path('', image_request, name="image-request")
 ]

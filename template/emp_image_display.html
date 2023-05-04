@@ -4,8 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8"> 
-    <title>Displaying Image</title> 
+    <meta charset="UTF-8">
+    <title>Displaying Image</title>
     <link rel="stylesheet" href="{% static '/home/css/styles.css' %}">
 </head>
 <body>
@@ -37,9 +37,68 @@
     <div class="img-description">
       <h3 class="main-header">Output Image</h3>
       <h3 class="main-header"><i>Short Explanation</i></h3>
+    {% if emp.name == "GrayScale" %}
       <p class="main-para">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi aliquid illo tenetur molestiae quod! Optio illum illo nulla vero? Commodi temporibus tempora praesentium? Nemo dolor voluptates aspernatur, ad optio accusantium?
+        Convert the input image to grayscale, where each pixel value represents the intensity of the light rather than its color. This creates a black-and-white version of the image.
       </p>
+    {% elif emp.name == "Color" %}
+      <p class="main-para">
+        Enhance the colors of the input image to make them appear more vivid and vibrant. This can help bring out details in the image that may be hard to see otherwise.
+      </p>
+    {% elif emp.name == "Blur" %}
+      <p class="main-para">
+        Apply a blurring effect to the input image, which can help to reduce noise or other unwanted artifacts in the image. This is often used to make images appear smoother or more polished.
+      </p>
+    {% elif emp.name == "Noise ( Gaussian )" %}
+      <p class="main-para">
+        Add Gaussian noise to the input image, which is a random variation in pixel values that can create a "grainy" or "fuzzy" appearance. This can be used to simulate the effect of noise in real-world images, or to create a more abstract or artistic effect.
+      </p>
+    {% elif emp.name == "Noise ( Salt and Pepper )" %}
+      <p class="main-para">
+        Add salt and pepper noise to the input image, which is a random variation in pixel values that can create a "speckled" or "dotted" appearance. This can be used to simulate the effect of noise in real-world images, or to create a more abstract or artistic effect.
+      </p>
+    {% elif emp.name == "Resizing ( 512 x 512 )" %}
+      <p class="main-para">
+        Resize the input image to a new size of 512 x 512 pixels, which can help to make the image more suitable for specific applications or use cases. This can also be used to reduce the overall size of the image for faster processing or storage.
+      </p>
+    {% elif emp.name == "Resizing ( 16 x 16 )" %}
+      <p class="main-para">
+        Resize the input image to a new size of 16 x 16 pixels, which can help to make the image more suitable for specific applications or use cases. This can also be used to reduce the overall size of the image for faster processing or storage.
+      </p>
+    {% elif emp.name == "Contrast ( 0-255 )" %}
+      <p class="main-para">
+        Adjust the contrast of the input image by stretching the range of pixel values. This can help to make the image appear more vivid or dramatic, and can bring out details that may be hard to see otherwise. The range of contrast adjustment is between 0-255.
+      </p>
+    {% elif emp.name == "Contrast ( 0-15 )" %}
+      <p class="main-para">
+        Adjust the contrast of the input image by stretching the range of pixel values. This can help to make the image appear more vivid or dramatic, and can bring out details that may be hard to see otherwise. The range of contrast adjustment is between 0-15.
+      </p>
+    {% elif emp.name == "Contrast ( 0-1 )" %}
+    <p class="main-para">
+        Adjusting contrast of an image is a way to increase or decrease the difference between the dark and light regions in an image. Here, contrast is adjusted by scaling pixel values by a factor between 0 and 1.
+    </p>
+    {% elif emp.name == "Rotation ( 15 degrees )" %}
+    <p class="main-para">
+        Rotating an image by 15 degrees means rotating it clockwise or counterclockwise by 15 degrees. This will change the orientation of the image by 15 degrees, which may cause some parts of the image to be cropped out or black areas to appear.
+    </p>
+    {% elif emp.name == "Rotation ( 45 degrees )" %}
+    <p class="main-para">
+        Rotating an image by 45 degrees means rotating it clockwise or counterclockwise by 45 degrees. This will change the orientation of the image by 45 degrees, which may cause some parts of the image to be cropped out or black areas to appear.
+    </p>
+    {% elif emp.name == "Rotation ( 90 degrees )" %}
+    <p class="main-para">
+        Rotating an image by 90 degrees means rotating it clockwise or counterclockwise by 90 degrees. This will change the orientation of the image by 90 degrees, which may cause some parts of the image to be cropped out or black areas to appear.
+    </p>
+    {% elif emp.name == "Rotation ( 180 degrees )" %}
+    <p class="main-para">
+        Rotating an image by 180 degrees means rotating it clockwise or counterclockwise by 180 degrees. This will flip the image upside down or left to right, which may cause some parts of the image to be cropped out or black areas to appear.
+    </p>
+    {% elif emp.name == "Histogram Equalization" %}
+    <p class="main-para">
+        Histogram equalization is a technique to enhance the contrast of an image by redistributing pixel intensities. In this technique, the image histogram is modified to make the intensities more evenly distributed across the range of possible values.
+    </p>
+    {% endif %}
+
     </div>
     <!-- Inbuilt function code -->
     <div class="accordion" id="accordionExample">
@@ -54,7 +113,7 @@
                 <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
             </div>
           </div>
-        </div>  
+        </div>
       </div>
       <!-- User-defined code -->
       <div class="accordion" id="accordionExample">
@@ -90,7 +149,7 @@
 
       <br/>
       <a class="main-link btn btn-primary" href="{% url 'home' %}">Return to HomePage</a>
-  
+
 </body>
 
 </html>

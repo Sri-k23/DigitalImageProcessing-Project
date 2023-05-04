@@ -1,5 +1,4 @@
 from django.db import models
-from django import forms
 import cv2
 import numpy as np
 
@@ -55,7 +54,7 @@ class Sampleapp(models.Model):
             noise = np.zeros(img.shape[:2], dtype=np.uint8)
             cv2.randu(noise, 0, 255)
             salt = noise > 250
-            pepper = noise < 5
+            pepper = noise < 3
             noise[salt] = 255
             noise[pepper] = 0
             # Add the noise to the image

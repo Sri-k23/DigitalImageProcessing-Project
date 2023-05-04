@@ -35,9 +35,58 @@
       <p class="main-para">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi aliquid illo tenetur molestiae quod! Optio illum illo nulla vero? Commodi temporibus tempora praesentium? Nemo dolor voluptates aspernatur, ad optio accusantium?
       </p>
-    <form method = "post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
+      <form method = "post" enctype="multipart/form-data">
+        <input type="hidden" name="csrfmiddlewaretoken" value="0CSQBcjbCd6V3bFVJgTBRUc8wPb0fEgPSvVkcz5FSUBkKOA9jOUccuDLZzHnHBJO">
+  <p>
+    <label for="id_name">Select Operation:</label>
+    <select name="name" required id="id_name">
+  <option value="" selected>---------</option>
+
+  <option value="RGB to BGR">BGR</option>
+
+  <option value="RGB to GRAY">GrayScale</option>
+
+  <option value="Color">Color</option>
+
+  <option value="Blur">Blur</option>
+
+  <option value="Noise ( Gaussian )">Noise ( Gaussian )</option>
+
+  <option value="Noise ( Salt and Pepper )">Noise ( Salt and Pepper )</option>
+
+  <option value="Resizing ( 512 x 512 )">Resizing ( 512 x 512 )</option>
+
+  <option value="Resizing ( 16 x 16 )">Resizing ( 16 x 16 )</option>
+
+  <option value="Contrast ( 0-255 )">Contrast ( 0-255 )</option>
+
+  <option value="Contrast ( 0-15 )">Contrast ( 0-15 )</option>
+
+  <option value="Contrast ( 0-1 )">Contrast ( 0-1 )</option>
+
+  <option value="Rotation ( 15 degrees )">Rotation ( 15 degrees )</option>
+
+  <option value="Rotation ( 45 degrees )">Rotation ( 45 degrees )</option>
+
+  <option value="Rotation ( 90 degrees )">Rotation ( 90 degrees )</option>
+
+  <option value="Rotation ( 180 degrees )">Rotation ( 180 degrees )</option>
+
+  <option value="Histogram Equalization">Histogram Equalization</option>
+
+</select>
+
+
+  </p>
+
+  <p>
+    <label for="id_emp_image">Select Image:</label>
+    <input type="file" name="emp_image" accept="image/*" required id="id_emp_image">
+
+
+
+
+  </p>
         <button type="submit">Upload</button>
     </form>
 </body>

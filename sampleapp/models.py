@@ -19,12 +19,8 @@ class Sampleapp(models.Model):
         super().save(*args, **kwargs)
 
         img = cv2.imread(self.emp_image.path)
-        if self.name == "RGB to BGR":
-            new_image = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
-        
-        elif self.name == "RGB to GRAY":
-            new_image = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
-
+        if self.name == "GrayScale":
+            new_image = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         elif self.name == "Color":
             new_image = img
         elif self.name == "Blur":
@@ -121,11 +117,7 @@ class Sampleapp(models.Model):
             # Merge the equalized L channel with the original A and B channels
             lab_img_eq = cv2.merge((l_channel_eq, a_channel, b_channel))
 
-            # Convert the LAB image back to the original color space
-            new_image = cv2.cvtColor(lab_img_eq, cv2.COLOR_LAB2BGR)
         else:
-            # if the name does not match any of the above conditions,
-            # simply save the original image and return
-            return
-
+            new_image = img
         cv2.imwrite(self.emp_image.path, new_image)
+

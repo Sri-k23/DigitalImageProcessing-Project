@@ -3,9 +3,13 @@ import cv2
 import numpy as np
 from skimage.util import random_noise
 
+ACTION_CHOICES= (
+    ('RGB to BGR', 'Blue green'),
+    ('RGB to GRAY', 'GrayScale'),
+)
 
 class Sampleapp(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, choices=ACTION_CHOICES)
     emp_image = models.ImageField(upload_to='images/')
 
     def __str__(self):

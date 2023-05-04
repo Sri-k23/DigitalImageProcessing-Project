@@ -1,9 +1,13 @@
 from django.db import models
 import cv2
 
+ACTION_CHOICES= (
+    ('RGB to BGR', 'Blue green'),
+    ('RGB to GRAY', 'GrayScale'),
+)
 
 class Sampleapp(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, choices=ACTION_CHOICES)
     emp_image = models.ImageField(upload_to='images/')
 
     def __str__(self):
@@ -13,10 +17,12 @@ class Sampleapp(models.Model):
         super().save(*args, **kwargs)
 
         img = cv2.imread(self.emp_image.path)
-        if self.name == "RGB to GrayScale":
+        if self.name == "RGB to BGR":
             new_image = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+        
+        elif self.name == "RGB to GRAY":
+            new_image = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
 
-        # elif self.name == ""
         else:
             new_image = img
         cv2.imwrite(self.emp_image.path, new_image)

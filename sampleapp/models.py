@@ -19,7 +19,9 @@ class Sampleapp(models.Model):
         super().save(*args, **kwargs)
 
         img = cv2.imread(self.emp_image.path)
-        if self.name == "GrayScale":
+        if self.name == "RGB to BGR":
+            new_image = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+        elif self.name == "RGB to GRAY":
             new_image = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         elif self.name == "Color":
             new_image = img

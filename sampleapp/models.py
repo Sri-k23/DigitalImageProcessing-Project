@@ -6,6 +6,20 @@ from skimage.util import random_noise
 ACTION_CHOICES= (
     ('RGB to BGR', 'BGR'),
     ('RGB to GRAY', 'GrayScale'),
+    ('Color','Color'),
+    ('Blur','Blur'),
+    ('Noise ( Gaussian )','Noise ( Gaussian )'),
+    ('Noise ( Salt and Pepper )','Noise ( Salt and Pepper )'),
+    ('Resizing ( 512 x 512 )','Resizing ( 512 x 512 )'),
+    ('Resizing ( 16 x 16 )','Resizing ( 16 x 16 )'),
+    ('Contrast ( 0-255 )','Contrast ( 0-255 )'),
+    ('Contrast ( 0-15 )','Contrast ( 0-15 )'),
+    ('Contrast ( 0-1 )','Contrast ( 0-1 )'),
+    ('Rotation ( 15 degrees )','Rotation ( 15 degrees )'),
+    ('Rotation ( 45 degrees )','Rotation ( 45 degrees )'),
+    ('Rotation ( 90 degrees )','Rotation ( 90 degrees )'),
+    ('Rotation ( 180 degrees )','Rotation ( 180 degrees )'),
+    ('Histogram Equalization','Histogram Equalization'),
 )
 
 class Sampleapp(models.Model):
@@ -118,7 +132,7 @@ class Sampleapp(models.Model):
 
             # Merge the equalized L channel with the original A and B channels
             lab_img_eq = cv2.merge((l_channel_eq, a_channel, b_channel))
-
+            new_image = lab_img_eq
         else:
             new_image = img
         cv2.imwrite(self.emp_image.path, new_image)

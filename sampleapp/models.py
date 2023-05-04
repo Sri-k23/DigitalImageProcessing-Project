@@ -1,12 +1,13 @@
 from django.db import models
 import cv2
 import numpy as np
-from skimage.util import random_noise
 
-ACTION_CHOICES= (
+
+ACTION_CHOICES = (
     ('RGB to BGR', 'Blue green'),
     ('RGB to GRAY', 'GrayScale'),
 )
+
 
 class Sampleapp(models.Model):
     name = models.CharField(max_length=50, choices=ACTION_CHOICES)
@@ -105,24 +106,11 @@ class Sampleapp(models.Model):
             M = cv2.getRotationMatrix2D((cols/2, rows/2), 180, 1)
             new_image = cv2.warpAffine(img, M, (cols, rows), borderMode=cv2.BORDER_CONSTANT, borderValue=(0, 0, 0))
         elif self.name == "Histogram Equalization":
-            # Convert the color image to the LAB color space
             lab_img = cv2.cvtColor(img, cv2.COLOR_BGR2LAB)
-
-            # Split the LAB image into L, A, and B channels
             l_channel, a_channel, b_channel = cv2.split(lab_img)
-
-            # Apply histogram equalization to the L channel
             l_channel_eq = cv2.equalizeHist(l_channel)
-
-            # Merge the equalized L channel with the original A and B channels
             lab_img_eq = cv2.merge((l_channel_eq, a_channel, b_channel))
-
-            # Convert the LAB image back to the original color space
             new_image = cv2.cvtColor(lab_img_eq, cv2.COLOR_LAB2BGR)
         else:
-            # if the name does not match any of the above conditions,
-            # simply save the original image and return
             return
-
         cv2.imwrite(self.emp_image.path, new_image)
-

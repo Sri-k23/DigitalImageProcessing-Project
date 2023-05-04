@@ -4,11 +4,11 @@ import cv2
 import numpy as np
 
 
-ACTION_CHOICES= (
+ACTION_CHOICES = (
     ('RGB to BGR', 'BGR'),
     ('RGB to GRAY', 'GrayScale'),
-    ('Color','Color'),
-    ('Blur','Blur'),
+    ('Color', 'Color'),
+    ('Blur', 'Blur'),
     ('Noise ( Gaussian )','Noise ( Gaussian )'),
     ('Noise ( Salt and Pepper )','Noise ( Salt and Pepper )'),
     ('Resizing ( 512 x 512 )','Resizing ( 512 x 512 )'),

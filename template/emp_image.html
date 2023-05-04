@@ -6,7 +6,8 @@
 <html lang="en"> 
 <head> 
     <meta charset="UTF-8"> 
-    <title>Digital Image Processing </title> 
+    <title>Digital Image Processing Project</title> 
+    <link rel="stylesheet" href="{% static '/home/css/styles.css' %}">
 </head> 
 <body>
     <nav class="navbar navbar-dark navbar-expand-lg bg-primary">
@@ -31,6 +32,9 @@
         </div>
       </nav> 
       <img src="{% static '/home/vector-web.png'%}" alt="one" width="391" height="357">
+      <p class="main-para">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi aliquid illo tenetur molestiae quod! Optio illum illo nulla vero? Commodi temporibus tempora praesentium? Nemo dolor voluptates aspernatur, ad optio accusantium?
+      </p>
     <form method = "post" enctype="multipart/form-data"> 
         {% csrf_token %} 
         {{ form.as_p }} 

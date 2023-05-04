@@ -9,18 +9,18 @@ ACTION_CHOICES = (
     ('RGB to GRAY', 'GrayScale'),
     ('Color', 'Color'),
     ('Blur', 'Blur'),
-    ('Noise ( Gaussian )','Noise ( Gaussian )'),
-    ('Noise ( Salt and Pepper )','Noise ( Salt and Pepper )'),
-    ('Resizing ( 512 x 512 )','Resizing ( 512 x 512 )'),
-    ('Resizing ( 16 x 16 )','Resizing ( 16 x 16 )'),
-    ('Contrast ( 0-255 )','Contrast ( 0-255 )'),
-    ('Contrast ( 0-15 )','Contrast ( 0-15 )'),
-    ('Contrast ( 0-1 )','Contrast ( 0-1 )'),
-    ('Rotation ( 15 degrees )','Rotation ( 15 degrees )'),
-    ('Rotation ( 45 degrees )','Rotation ( 45 degrees )'),
-    ('Rotation ( 90 degrees )','Rotation ( 90 degrees )'),
-    ('Rotation ( 180 degrees )','Rotation ( 180 degrees )'),
-    ('Histogram Equalization','Histogram Equalization'),
+    ('Noise ( Gaussian )', 'Noise ( Gaussian )'),
+    ('Noise ( Salt and Pepper )', 'Noise ( Salt and Pepper )'),
+    ('Resizing ( 512 x 512 )', 'Resizing ( 512 x 512 )'),
+    ('Resizing ( 16 x 16 )', 'Resizing ( 16 x 16 )'),
+    ('Contrast ( 0-255 )', 'Contrast ( 0-255 )'),
+    ('Contrast ( 0-15 )', 'Contrast ( 0-15 )'),
+    ('Contrast ( 0-1 )', 'Contrast ( 0-1 )'),
+    ('Rotation ( 15 degrees )', 'Rotation ( 15 degrees )'),
+    ('Rotation ( 45 degrees )', 'Rotation ( 45 degrees )'),
+    ('Rotation ( 90 degrees )', 'Rotation ( 90 degrees )'),
+    ('Rotation ( 180 degrees )', 'Rotation ( 180 degrees )'),
+    ('Histogram Equalization', 'Histogram Equalization'),
 )
 
 
@@ -38,9 +38,13 @@ class Sampleapp(models.Model):
         if self.name == "RGB to BGR":
             new_image = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
         elif self.name == "RGB to GRAY":
-            new_image = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+            new_image = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
         elif self.name == "Color":
-            new_image = img
+            if img.shape[-1] == 1:
+                new_image = cv2.cvtColor(img, cv2.COLOR_GRAY2RGB)
+            else:
+                # Image is already in RGB format
+                new_image = img
         elif self.name == "Blur":
             new_image = cv2.GaussianBlur(img, (9, 9), cv2.BORDER_DEFAULT)
         elif self.name == "Noise ( Gaussian )":

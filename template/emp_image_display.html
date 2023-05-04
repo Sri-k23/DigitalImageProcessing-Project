@@ -238,35 +238,329 @@ resize_opencv("image.jpg", (16, 16))
               </code></pre>
               {% elif emp.name == "Contrast ( 0-255 )" %}
               <pre><code class="python" style="text-align: left;">
+import cv2
+
+def adjust_contrast(img, level):
+    """
+    Adjust the contrast of an image given a contrast level between 0 and 255.
+    """
+    if level < 0:
+        level = 0
+    elif level > 255:
+        level = 255
+    factor = (259 * (level + 255)) / (255 * (259 - level))
+    new_img = cv2.addWeighted(img, factor, img, 0, 0)
+    return new_img
+
+# Example usage:
+img = cv2.imread("image.jpg")
+contrast_img = adjust_contrast(img, 150)
+cv2.imshow("Original Image", img)
+cv2.imshow("Contrast Adjusted Image", contrast_img)
+cv2.waitKey(0)
 
               </code></pre>
               {% elif emp.name == "Contrast ( 0-15 )" %}
               <pre><code class="python" style="text-align: left;">
+import cv2
+
+def adjust_contrast(img, level):
+    """
+    Adjust the contrast of an image given a contrast level between 0 and 15.
+    """
+    if level < 0:
+        level = 0
+    elif level > 15:
+        level = 15
+    factor = (259 * (level + 255)) / (255 * (259 - level))
+    new_img = cv2.addWeighted(img, factor, img, 0, 0)
+    return new_img
+
+# Example usage:
+img = cv2.imread("image.jpg")
+contrast_img = adjust_contrast(img, 8)
+cv2.imshow("Original Image", img)
+cv2.imshow("Contrast Adjusted Image", contrast_img)
+cv2.waitKey(0)
 
               </code></pre>
               {% elif emp.name == "Contrast ( 0-1 )" %}
               <pre><code class="python" style="text-align: left;">
+import cv2
+
+def adjust_contrast(img, level):
+    """
+    Adjust the contrast of an image given a contrast level between 0 and 1.
+    """
+    if level < 0:
+        level = 0
+    elif level > 1:
+        level = 1
+    factor = (259 * (level + 255)) / (255 * (259 - level))
+    new_img = cv2.addWeighted(img, factor, img, 0, 0)
+    return new_img
+
+# Example usage:
+img = cv2.imread("image.jpg")
+contrast_img = adjust_contrast(img, 0.5)
+cv2.imshow("Original Image", img)
 
               </code></pre>
               {% elif emp.name == "Rotation ( 15 degrees )" %}
               <pre><code class="python" style="text-align: left;">
+import numpy as np
+import cv2
+
+# define the function to rotate the image
+def rotate_image(img, angle):
+    height, width = img.shape[:2]
+    angle = np.deg2rad(angle)
+    cos = np.cos(angle)
+    sin = np.sin(angle)
+    center = (width // 2, height // 2)
+
+    result = np.zeros((height, width, 3), dtype=img.dtype)
+    for i in range(height):
+        for j in range(width):
+            x, y = j - center[0], i - center[1]
+            x_new, y_new = x * cos - y * sin, x * sin + y * cos
+            x_new += center[0]
+            y_new += center[1]
+            if x_new >= 0 and x_new < width and y_new >= 0 and y_new < height:
+                result[i, j, :] = img[int(y_new), int(x_new), :]
+
+    return result
+
+
+# Load the image
+img = cv2.imread("PISA.jpg")
+
+
+# Get the image height and width
+(h, w) = img.shape[:2]
+
+# angle
+angle=15
+
+# Calculate the center of the image
+center = (w / 2, h / 2)
+
+# Get the rotation matrix from built-in function
+rotation_mat = cv2.getRotationMatrix2D(center, angle, 1.0)
+result_2 = cv2.warpAffine(img, rotation_mat, (w, h), flags=cv2.INTER_LINEAR)
+
+# Perform the rotation
+result = rotate_image(img, angle)
+
+# Display the rotated image
+cv2.imshow("Rotated Image from manual function", result)
+cv2.imshow("Rotated Image from inbuilt function", result_2)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
 
               </code></pre>
               {% elif emp.name == "Rotation ( 45 degrees )" %}
               <pre><code class="python" style="text-align: left;">
+import numpy as np
+import cv2
+
+# define the function to rotate the image
+def rotate_image(img, angle):
+    height, width = img.shape[:2]
+    angle = np.deg2rad(angle)
+    cos = np.cos(angle)
+    sin = np.sin(angle)
+    center = (width // 2, height // 2)
+
+    result = np.zeros((height, width, 3), dtype=img.dtype)
+    for i in range(height):
+        for j in range(width):
+            x, y = j - center[0], i - center[1]
+            x_new, y_new = x * cos - y * sin, x * sin + y * cos
+            x_new += center[0]
+            y_new += center[1]
+            if x_new >= 0 and x_new < width and y_new >= 0 and y_new < height:
+                result[i, j, :] = img[int(y_new), int(x_new), :]
+
+    return result
+
+
+# Load the image
+img = cv2.imread("PISA.jpg")
+
+
+# Get the image height and width
+(h, w) = img.shape[:2]
+
+# angle
+angle=45
+
+# Calculate the center of the image
+center = (w / 2, h / 2)
+
+# Get the rotation matrix from built-in function
+rotation_mat = cv2.getRotationMatrix2D(center, angle, 1.0)
+result_2 = cv2.warpAffine(img, rotation_mat, (w, h), flags=cv2.INTER_LINEAR)
+
+# Perform the rotation
+result = rotate_image(img, angle)
+
+# Display the rotated image
+cv2.imshow("Rotated Image from manual function", result)
+cv2.imshow("Rotated Image from inbuilt function", result_2)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
 
               </code></pre>
               {% elif emp.name == "Rotation ( 90 degrees )" %}
               <pre><code class="python" style="text-align: left;">
+import cv2
+
+import numpy as np
+import cv2
+
+# define the function to rotate the image
+def rotate_image(img, angle):
+    height, width = img.shape[:2]
+    angle = np.deg2rad(angle)
+    cos = np.cos(angle)
+    sin = np.sin(angle)
+    center = (width // 2, height // 2)
+
+    result = np.zeros((height, width, 3), dtype=img.dtype)
+    for i in range(height):
+        for j in range(width):
+            x, y = j - center[0], i - center[1]
+            x_new, y_new = x * cos - y * sin, x * sin + y * cos
+            x_new += center[0]
+            y_new += center[1]
+            if x_new >= 0 and x_new < width and y_new >= 0 and y_new < height:
+                result[i, j, :] = img[int(y_new), int(x_new), :]
+
+    return result
+
+
+# Load the image
+img = cv2.imread("PISA.jpg")
+
+
+# Get the image height and width
+(h, w) = img.shape[:2]
+
+# angle
+angle=90
+
+# Calculate the center of the image
+center = (w / 2, h / 2)
+
+# Get the rotation matrix from built-in function
+rotation_mat = cv2.getRotationMatrix2D(center, angle, 1.0)
+result_2 = cv2.warpAffine(img, rotation_mat, (w, h), flags=cv2.INTER_LINEAR)
+
+# Perform the rotation
+result = rotate_image(img, angle)
+
+# Display the rotated image
+cv2.imshow("Rotated Image from manual function", result)
+cv2.imshow("Rotated Image from inbuilt function", result_2)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
 
               </code></pre>
               {% elif emp.name == "Rotation ( 180 degrees )" %}
               <pre><code class="python" style="text-align: left;">
+import numpy as np
+import cv2
+
+# define the function to rotate the image
+def rotate_image(img, angle):
+    height, width = img.shape[:2]
+    angle = np.deg2rad(angle)
+    cos = np.cos(angle)
+    sin = np.sin(angle)
+    center = (width // 2, height // 2)
+
+    result = np.zeros((height, width, 3), dtype=img.dtype)
+    for i in range(height):
+        for j in range(width):
+            x, y = j - center[0], i - center[1]
+            x_new, y_new = x * cos - y * sin, x * sin + y * cos
+            x_new += center[0]
+            y_new += center[1]
+            if x_new >= 0 and x_new < width and y_new >= 0 and y_new < height:
+                result[i, j, :] = img[int(y_new), int(x_new), :]
+
+    return result
+
+
+# Load the image
+img = cv2.imread("PISA.jpg")
+
+
+# Get the image height and width
+(h, w) = img.shape[:2]
+
+# angle
+angle=180
+
+# Calculate the center of the image
+center = (w / 2, h / 2)
+
+# Get the rotation matrix from built-in function
+rotation_mat = cv2.getRotationMatrix2D(center, angle, 1.0)
+result_2 = cv2.warpAffine(img, rotation_mat, (w, h), flags=cv2.INTER_LINEAR)
+
+# Perform the rotation
+result = rotate_image(img, angle)
+
+# Display the rotated image
+cv2.imshow("Rotated Image from manual function", result)
+cv2.imshow("Rotated Image from inbuilt function", result_2)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
 
               </code></pre>
               {% elif emp.name == "Histogram Equalization" %}
               <pre><code class="python" style="text-align: left;">
+import cv2
+import numpy as np
+from matplotlib import pyplot as plt
 
+# read the image file into memory using cv2.imread()
+img_cv2 = cv2.imread('pout-dark.jpg', 0)
+
+# apply histogram equalization using cv2.equalizeHist()
+img_cv2_eq = cv2.equalizeHist(img_cv2)
+
+# calculate histogram of the image using np.histogram()
+hist, bins = np.histogram(img_cv2, 256, [0, 256])
+
+# calculate the cumulative distribution function
+cdf = hist.cumsum()
+cdf_normalized = cdf * hist.max() / cdf.max()
+
+# equalize the histogram using the CDF
+img_eq = np.interp(img_cv2.flatten(), bins[:-1], cdf_normalized).reshape(img_cv2.shape)
+
+# display the original and equalized images side by side using matplotlib.pyplot.imshow()
+fig, axs = plt.subplots(nrows=2, ncols=2, figsize=(10, 10))
+
+axs[0, 0].imshow(img_cv2, cmap='gray')
+axs[0, 0].set_title('Original - cv2')
+axs[0, 1].imshow(img_cv2_eq, cmap='gray')
+axs[0, 1].set_title('Equalized - cv2')
+axs[1, 0].imshow(img_cv2, cmap='gray')
+axs[1, 0].set_title('Original - user-defined')
+axs[1, 1].imshow(img_eq, cmap='gray')
+axs[1, 1].set_title('Equalized - user-defined')
+
+for ax in axs.flat:
+    ax.axis('off')
+
+plt.show()
               </code></pre>
               {% endif %}
             </div>
